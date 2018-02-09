@@ -1,4 +1,5 @@
 ﻿using Hearthstone.Contracts;
+using Hearthstone.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,52 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
-    class Creature : ICreature
+    class Creature : Card, ICreature
     {
-        public int AttackPoints { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int ManaCost { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int HealthPoints { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private int attackPoints;
+        private int healtPoints;
+        private readonly CreatureType creatureType;
+       
+        public Creature(string name, int manaCost, int attackPoints, int healthPoints, CreatureType creatureType)
+        {
+            base.Name = name;
+            base.ManaCost = manaCost;
+            this.AttackPoints = attackPoints;
+            this.HealthPoints = healthPoints;
+            this.creatureType = creatureType;
+        }
+
+        public int AttackPoints
+        {
+            get
+            {
+                return this.attackPoints;
+            }
+            set
+            {
+                this.attackPoints = value;
+            }
+        }
+
+        public int HealthPoints
+        {
+            get
+            {
+                return this.healtPoints;
+            }
+            set
+            {
+                this.healtPoints = value;
+            }
+        }
+
+        public CreatureType CreatureType
+        {
+            get
+            {
+                return this.creatureType;
+            }
+        }
 
         public void Attack(IDamageable target)
         {
@@ -26,7 +67,12 @@ namespace Hearthstone.Card
 
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder info = new StringBuilder();
+
+            info.AppendFormat("Name: {0}, Mana cost: {1}, Attack points: {2}, Health points: {3}, Creature type:{4}",
+                base.Name, base.ManaCost, this.AttackPoints, this.HealthPoints, this.CreatureType);
+
+            return info.ToString();
         }
     }
 }

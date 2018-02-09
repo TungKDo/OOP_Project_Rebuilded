@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Card\Card.cs" />
     <Compile Include="Card\Creature.cs" />
     <Compile Include="Card\Spell.cs" />
     <Compile Include="Collections\BattleField.cs" />
@@ -50,6 +51,8 @@
     <Compile Include="Contracts\IDamageable.cs" />
     <Compile Include="Contracts\IPlayer.cs" />
     <Compile Include="Contracts\ISpell.cs" />
+    <Compile Include="Enums\CretureType.cs" />
+    <Compile Include="Exceptions\InvalidCardNameException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

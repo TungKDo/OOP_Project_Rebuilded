@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hearthstone.Contracts
+namespace Hearthstone.Enums
 {
-    public interface ICard
+    public enum CreatureType
     {
-        string Name { get; }
-        int ManaCost { get; }
+        Neutral,
+        Elemental,
+        Demon,
+        Beast
     }
 }
