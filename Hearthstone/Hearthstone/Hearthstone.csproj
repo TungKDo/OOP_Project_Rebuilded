@@ -44,14 +44,25 @@
     <Compile Include="Card\Spell.cs" />
     <Compile Include="Collections\BattleField.cs" />
     <Compile Include="Collections\Deck.cs" />
+    <Compile Include="Collections\DeckCollection.cs" />
     <Compile Include="Collections\Hand.cs" />
     <Compile Include="Contracts\ICard.cs" />
     <Compile Include="Contracts\ICreature.cs" />
     <Compile Include="Contracts\IDamageable.cs" />
+    <Compile Include="Contracts\IDeckCollection.cs" />
     <Compile Include="Contracts\IPlayer.cs" />
     <Compile Include="Contracts\ISpell.cs" />
+    <Compile Include="Engine\DeckCollectionManager.cs" />
+    <Compile Include="Engine\EngineConstants.cs" />
+    <Compile Include="Engine\MainMenu.cs" />
+    <Compile Include="Engine\PlayGame.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+    <Folder Include="Engine\Factory\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

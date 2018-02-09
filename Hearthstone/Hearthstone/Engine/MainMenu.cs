@@ -4,13 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hearthstone
+namespace Hearthstone.Engine
 {
-    public class Program
+    public class MainMenu
     {
-        static void Main()
+        public MainMenu()
         {
 
         }
+
+
+
     }
 }

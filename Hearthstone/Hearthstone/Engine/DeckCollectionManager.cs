@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hearthstone
+namespace Hearthstone.Engine
 {
-    public class Program
+    class DeckCollectionManager
     {
-        static void Main()
-        {
-
-        }
     }
 }

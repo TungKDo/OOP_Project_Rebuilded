@@ -1,6 +1,6 @@
 ﻿namespace Hearthstone.Collections
 {
-    public class Deck
+    public class Deck 
     {
     }
 }

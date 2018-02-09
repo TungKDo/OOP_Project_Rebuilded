@@ -12,8 +12,8 @@ namespace Hearthstone.Contracts
         int ManaCrystal { get; set; }
         int MaxManaCrystal { get; set; }
         Deck PlayerDeck { get; set; }
-        Hand PlayerHand { get; set; }
-        BattleField BattleField { get; set; }
+        List<ICard> PlayerHand { get; set; }
+        List<ICreature> BattleField { get; set; }
         void DrawCard();
         void PlayCreature();
         void PlaySpell(IPlayer opponent);
