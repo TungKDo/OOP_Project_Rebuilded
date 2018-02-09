@@ -7,19 +7,41 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
-    class Spell : ISpell
+    class Spell : Card, ISpell
     {
-        public int Damage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int ManaCost { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private int damage;
+
+        public Spell(string name, int manaCost, int damage)
+        {
+            base.Name = name;
+            base.ManaCost = manaCost;
+            this.Damage = damage;
+        }
+
+        public int Damage
+        {
+            get
+            {
+                return this.damage;
+            }
+            set
+            {
+                this.damage = value;
+            }
+        }
 
         public void CastSpell(IDamageable target)
         {
             throw new NotImplementedException();
         }
+
         public override string ToString()
         {
-            return base.ToString();
+            StringBuilder info = new StringBuilder();
+
+            info.AppendFormat("Name: {0}, Mana cost: {1}, Damage: {2}", this.Name, this.ManaCost, this.damage);
+
+            return info.ToString();
         }
     }
 }
