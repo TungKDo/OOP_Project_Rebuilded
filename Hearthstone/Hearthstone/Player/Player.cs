@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hearthstone.Player
+namespace Hearthstone
 {
     class Player : IPlayer
     {
@@ -14,16 +14,16 @@ namespace Hearthstone.Player
 
         public Player(Deck playerDeck)
         {
-            ManaCrystal = 0; //ok
-            MaxManaCrystal = 0;
+            ManaCrystals = 0; //ok
+            MaxManaCrystals = 0;
             this.PlayerDeck = playerDeck;
             PlayerHand = new List<ICard>();
             BattleField = new List<ICreature>();
             HealthPoints = 15;
         }
-        public int ManaCrystal { get ; set ; }
+        public int ManaCrystals { get ; set ; }
 
-        public int MaxManaCrystal {
+        public int MaxManaCrystals {
             get
             {
                 return maxManaCrystals;
@@ -53,9 +53,14 @@ namespace Hearthstone.Player
             return myCreature;
         }
 
-        public void DrawCard()
+        public void DrawACard()
         {
-            throw new NotImplementedException();
+            if(PlayerDeck.Cards.Count > 0)
+            {
+                ICard cardToBeDraw = PlayerDeck.Cards[PlayerDeck.Cards.Count - 1];
+                this.PlayerHand.Add(cardToBeDraw);
+                this.PlayerDeck.Remove(cardToBeDraw);
+            }
         }
 
         public bool IsDead()

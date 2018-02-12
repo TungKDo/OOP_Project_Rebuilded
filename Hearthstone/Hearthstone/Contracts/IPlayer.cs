@@ -9,12 +9,12 @@ namespace Hearthstone.Contracts
 {
     interface IPlayer : IDamageable
     {
-        int ManaCrystal { get; set; }
-        int MaxManaCrystal { get; set; }
+        int ManaCrystals { get; set; }
+        int MaxManaCrystals { get; set; }
         Deck PlayerDeck { get; set; }
         List<ICard> PlayerHand { get; set; }
         List<ICreature> BattleField { get; set; }
-        void DrawCard();
+        void DrawACard();
         void PlayCreature();
         void PlaySpell(IDamageable opponent);
         void AttackWithCreature(ICreature attackingCreature, IDamageable opponent);

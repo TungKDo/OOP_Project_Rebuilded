@@ -57,36 +57,44 @@ namespace Hearthstone.Engine
                         break;
 
                     case "3":
-                        Constants.AskToEnterDeckName;
-                        deckCollection.PrintNameOfAllDecks();
-                        deckName = Console.ReadLine();
-
-                        Console.WriteLine("Please enter the name of the cards that you want to add:");
-                        Console.WriteLine("When done, please type exit ");
-
-                        while (true)
-                        {
-                            string cardToBeAdded = Console.ReadLine();
-
-                            if (cardToBeAdded == "exit")
-                            {
-                                break;
-                            }
-                            foreach (ICard card in deckCollection.MyDeck)
-                            {
-                                if (card.Name.ToLower() == cardToBeAdded)
-                                {
-                                    Console.WriteLine("You already have this card in this deck.");
-                                    ManageDeckCollection();
-                                }
-                            }
-                                deckCollection.MyDeck[deckName].Add(cardFactory.CreateCard(cardToBeAdded));
-                        }
+                        deckName = AddMultipleCardsToDeck();
 
                         ManageDeckCollection();
                         break;
                 }
             }
+        }
+
+        private string AddMultipleCardsToDeck()
+        {
+            string deckName;
+            Constants.AskToEnterDeckName;
+            deckCollection.PrintNameOfAllDecks();
+            deckName = Console.ReadLine();
+
+            Console.WriteLine("Please enter the name of the cards that you want to add:");
+            Console.WriteLine("When done, please type exit ");
+
+            while (true)
+            {
+                string cardToBeAdded = Console.ReadLine();
+
+                if (cardToBeAdded == "exit")
+                {
+                    break;
+                }
+                foreach (ICard card in deckCollection.MyDeck[deckName].Cards)
+                {
+                    if (card.Name.ToLower() == cardToBeAdded)
+                    {
+                        Console.WriteLine("You already have this card in this deck.");
+                        ManageDeckCollection();
+                    }
+                }
+                deckCollection.MyDeck[deckName].Add(cardFactory.CreateCard(cardToBeAdded));
+            }
+
+            return deckName;
         }
     }
 }
