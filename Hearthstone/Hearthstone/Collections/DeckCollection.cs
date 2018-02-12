@@ -10,7 +10,7 @@ namespace Hearthstone.Collections
     public class DeckCollection : IDeckCollection
     {
         //single instance 
-
+        
         private readonly IDictionary<string, Deck> myDecks;
 
         public DeckCollection()

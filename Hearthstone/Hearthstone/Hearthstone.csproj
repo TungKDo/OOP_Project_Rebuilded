@@ -50,10 +50,8 @@
     <Compile Include="Card\Card.cs" />
     <Compile Include="Card\Creature.cs" />
     <Compile Include="Card\Spell.cs" />
-    <Compile Include="Collections\BattleField.cs" />
     <Compile Include="Collections\Deck.cs" />
     <Compile Include="Collections\DeckCollection.cs" />
-    <Compile Include="Collections\Hand.cs" />
     <Compile Include="Contracts\ICard.cs" />
     <Compile Include="Contracts\ICreature.cs" />
     <Compile Include="Contracts\IDamageable.cs" />
@@ -66,6 +64,7 @@
     <Compile Include="Engine\MainMenu.cs" />
     <Compile Include="Engine\PlayGame.cs" />
     <Compile Include="Exceptions\CardNullException.cs" />
+    <Compile Include="Factory\CardFactory.cs" />
     <Compile Include="Injection\AutofacConfig.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Enums\CretureType.cs" />
