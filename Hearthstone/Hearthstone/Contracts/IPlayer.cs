@@ -16,8 +16,8 @@ namespace Hearthstone.Contracts
         List<ICreature> BattleField { get; set; }
         void DrawCard();
         void PlayCreature();
-        void PlaySpell(IPlayer opponent);
-        void AttackWithCreature(IPlayer opponent);
+        void PlaySpell(IDamageable opponent);
+        void AttackWithCreature(ICreature attackingCreature, IDamageable opponent);
 
     }
 }

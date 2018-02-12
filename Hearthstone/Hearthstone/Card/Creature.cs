@@ -14,10 +14,9 @@ namespace Hearthstone.Card
         private int healtPoints;
         private readonly CreatureType creatureType;
        
-        public Creature(string name, int manaCost, int attackPoints, int healthPoints, CreatureType creatureType)
+        public Creature(string name, int manaCost, int attackPoints, int healthPoints, CreatureType creatureType) 
+            : base(name, manaCost)
         {
-            base.Name = name;
-            base.ManaCost = manaCost;
             this.AttackPoints = attackPoints;
             this.HealthPoints = healthPoints;
             this.creatureType = creatureType;
@@ -29,7 +28,7 @@ namespace Hearthstone.Card
             {
                 return this.attackPoints;
             }
-            set
+            protected set
             {
                 this.attackPoints = value;
             }
@@ -57,22 +56,14 @@ namespace Hearthstone.Card
 
         public void Attack(IDamageable target)
         {
-            throw new NotImplementedException();
+            target.HealthPoints -= this.AttackPoints;
         }
 
-        public bool IsDead()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public override string ToString()
         {
-            StringBuilder info = new StringBuilder();
-
-            info.AppendFormat("Name: {0}, Mana cost: {1}, Attack points: {2}, Health points: {3}, Creature type:{4}",
+            return string.Format("Name: {0}, Mana cost: {1}, Attack points: {2}, Health points: {3}, Creature type:{4}",
                 base.Name, base.ManaCost, this.AttackPoints, this.HealthPoints, this.CreatureType);
-
-            return info.ToString();
         }
     }
 }
