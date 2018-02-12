@@ -9,14 +9,31 @@ namespace Hearthstone.Collections
 {
     public class DeckCollection : IDeckCollection
     {
+        //single instance 
+
+        private readonly IDictionary<string, Deck> myDecks;
+
+        public DeckCollection()
+        {
+            this.myDecks = new Dictionary<string, Deck>();
+        }
+
+        public IDictionary<string, Deck> MyDeck
+        {
+            get
+            {
+                return new Dictionary<string, Deck>(this.myDecks);
+            }
+        }
+
         public void CreateDeck(string deckName)
         {
-            throw new NotImplementedException();
+            myDecks.Add(deckName, new Deck());
         }
 
         public void RemoveDeck(string deckName)
         {
-            throw new NotImplementedException();
+            myDecks.Remove(deckName);
         }
     }
 }

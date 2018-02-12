@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Injection
 {
-    class AutofacConfig
+    internal sealed class AutofacConfig
     {
     }
 }

@@ -65,6 +65,8 @@
     <Compile Include="Engine\Factory\CardFactory.cs" />
     <Compile Include="Engine\MainMenu.cs" />
     <Compile Include="Engine\PlayGame.cs" />
+    <Compile Include="Exceptions\CardNullException.cs" />
+    <Compile Include="Injection\AutofacConfig.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Enums\CretureType.cs" />
     <Compile Include="Exceptions\InvalidCardNameException.cs" />
@@ -73,7 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="Injection\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

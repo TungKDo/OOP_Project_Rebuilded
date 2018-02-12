@@ -16,7 +16,7 @@ namespace Hearthstone.Collections
             this.cardOnBattleField = new List<ICard>();
         }
 
-        public IList<ICard> BattleField
+        public IList<ICard> CardsOnBattleField
         {
             get
             {
