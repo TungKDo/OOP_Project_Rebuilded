@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Engine.Factory
 {
-    public class CardFactory
+    public class CardFactory : ICardFactory
     {
-        public static ICard CreateCard(string cardToBeAdded)
+        public ICard CreateCard(string cardToBeAdded)
         {
             cardToBeAdded = cardToBeAdded.ToLower();
             switch (cardToBeAdded)

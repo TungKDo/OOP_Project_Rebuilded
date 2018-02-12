@@ -9,8 +9,6 @@ namespace Hearthstone.Collections
 {
     public class DeckCollection : IDeckCollection
     {
-        //single instance 
-        
         private readonly IDictionary<string, Deck> myDecks;
 
         public DeckCollection()
@@ -24,6 +22,7 @@ namespace Hearthstone.Collections
             {
                 return new Dictionary<string, Deck>(this.myDecks);
             }
+            
         }
 
         public void CreateDeck(string deckName)
@@ -34,6 +33,14 @@ namespace Hearthstone.Collections
         public void RemoveDeck(string deckName)
         {
             myDecks.Remove(deckName);
+        }
+
+        public void PrintNameOfAllDecks()
+        {
+            foreach (string key in MyDeck.Keys)
+            {
+                Console.WriteLine(key);
+            }
         }
     }
 }

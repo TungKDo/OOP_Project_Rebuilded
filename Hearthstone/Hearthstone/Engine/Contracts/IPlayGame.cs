@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Engine.Contracts
 {
-    public interface IMainMenu
+    public interface IPlayGame
     {
-        void Run();
+        void PreGameSelection();
     }
 }

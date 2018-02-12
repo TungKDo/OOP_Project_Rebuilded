@@ -9,5 +9,6 @@ namespace Hearthstone.Contracts
     interface IDamageable
     {
         int HealthPoints { get; set; }
+        bool IsDead { get; set; }
     }
 }

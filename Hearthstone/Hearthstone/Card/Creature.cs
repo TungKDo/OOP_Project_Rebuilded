@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
-    class Creature : Card, ICreature
+    class Creature : Card, ICreature, ICard
     {
         private int attackPoints;
         private int healtPoints;
@@ -53,6 +53,8 @@ namespace Hearthstone.Card
                 return this.creatureType;
             }
         }
+
+        public bool IsDead { get; set; }
 
         public void Attack(IDamageable target)
         {

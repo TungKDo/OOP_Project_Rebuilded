@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Contracts
 {
-    interface ICardFactory
+    public interface ICardFactory
     {
+        ICard CreateCard(string cardToBeAdded);
     }
 }

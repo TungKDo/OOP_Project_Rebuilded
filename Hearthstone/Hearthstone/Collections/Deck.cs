@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Hearthstone.Collections
 {
-    public class Deck 
+    public class Deck : IDeck
     {
         private IList<ICard> cards;
 
@@ -46,7 +46,7 @@ namespace Hearthstone.Collections
         {
             if (card == null)
             {
-                throw new CardNullException("Card cannot be null.")
+                throw new CardNullException("Card cannot be null.");
             }
 
             if (!CheckIfListContainsCard(card))
@@ -83,6 +83,15 @@ namespace Hearthstone.Collections
             }
 
             return ifListContainsCard;
+        }
+
+        public void ListAllCards()
+        {
+            foreach (ICard card in this.cards)
+            {
+                Console.WriteLine(card.ToString());
+                Console.WriteLine("===========================");
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hearthstone.Collections;
+﻿using Hearthstone.Card;
+using Hearthstone.Collections;
 using Hearthstone.Contracts;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Hearthstone
     class Player : IPlayer
     {
         private int maxManaCrystals;
+        private int healthPoints;
 
         public Player(Deck playerDeck)
         {
@@ -21,9 +23,10 @@ namespace Hearthstone
             BattleField = new List<ICreature>();
             HealthPoints = 15;
         }
-        public int ManaCrystals { get ; set ; }
+        public int ManaCrystals { get; set; }
 
-        public int MaxManaCrystals {
+        public int MaxManaCrystals
+        {
             get
             {
                 return maxManaCrystals;
@@ -38,24 +41,42 @@ namespace Hearthstone
 
         public List<ICard> PlayerHand { get; set; }
         public List<ICreature> BattleField { get; set; }
-        public int HealthPoints { get; set; }
-
-        public void AttackWithCreature(ICreature attacking IPlayer opponent)
+        public int HealthPoints
         {
-            
-            ICreature 
+            get
+            {
+                return this.healthPoints;
+            }
+            set
+            {
+                this.healthPoints = value;
+                if (value < 0)
+                {
+                    IsDead = true;
+                }
+            }
         }
+        public bool IsDead { get; set; }
+
 
         public ICreature SelectACreature(string creatureName)
         {
             creatureName = creatureName.ToLower();
-            ICreature myCreature = (ICreature)this.BattleField.FirstOrDefault(x => x.Name.ToLower() == creatureName);
+            ICreature myCreature = (ICreature)this.PlayerHand.FirstOrDefault(x => x.Name.ToLower() == creatureName);
             return myCreature;
         }
 
+        public ISpell SelectASpell(string spellName)
+        {
+            spellName = spellName.ToLower();
+            ISpell mySpell = (ISpell)this.PlayerHand.FirstOrDefault(x => x.Name.ToLower() == spellName);
+            return mySpell;
+        }
+
+
         public void DrawACard()
         {
-            if(PlayerDeck.Cards.Count > 0)
+            if (PlayerDeck.Cards.Count > 0)
             {
                 ICard cardToBeDraw = PlayerDeck.Cards[PlayerDeck.Cards.Count - 1];
                 this.PlayerHand.Add(cardToBeDraw);
@@ -63,19 +84,52 @@ namespace Hearthstone
             }
         }
 
-        public bool IsDead()
+        public void PlayCreature(ICreature card)
         {
-            throw new NotImplementedException();
+            PlayerHand.Remove(card);
+            BattleField.Add(card);
+            ManaCrystals -= (int)card.ManaCost;
         }
 
-        public void PlayCreature()
+        public void PrintCreaturesInHand()
         {
-            throw new NotImplementedException();
+            foreach (var card in PlayerHand)
+            {
+                if (card.GetType() == typeof(Creature))
+                {
+                    Console.WriteLine(card.ToString());
+                }
+            }
+        }
+        public void PrintSpellsInHand()
+        {
+            foreach (var card in PlayerHand)
+            {
+                if (card.GetType() == typeof(Spell))
+                {
+                    Console.WriteLine(card.ToString());
+                }
+            }
+        }
+
+        public void PrintCreaturesOnBattleField()
+        {
+            foreach (var card in BattleField)
+            {
+                Console.WriteLine(card.ToString());
+            }
         }
 
         public void PlaySpell(IPlayer opponent)
         {
             throw new NotImplementedException();
         }
+
+        public void PlaySpell(IDamageable opponent)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

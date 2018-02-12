@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{0E8EA4AB-1B40-4945-9230-107135F76DBC}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Hearthstone</RootNamespace>
     <AssemblyName>Hearthstone</AssemblyName>
@@ -28,6 +28,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -52,22 +58,26 @@
     <Compile Include="Card\Spell.cs" />
     <Compile Include="Collections\Deck.cs" />
     <Compile Include="Collections\DeckCollection.cs" />
+    <Compile Include="Contracts\ICardFactory.cs" />
+    <Compile Include="Contracts\IDeck.cs" />
     <Compile Include="Contracts\ICard.cs" />
     <Compile Include="Contracts\ICreature.cs" />
     <Compile Include="Contracts\IDamageable.cs" />
     <Compile Include="Contracts\IDeckCollection.cs" />
     <Compile Include="Contracts\IPlayer.cs" />
     <Compile Include="Contracts\ISpell.cs" />
+    <Compile Include="Engine\Constants.cs" />
+    <Compile Include="Engine\Contracts\IMainMenu.cs" />
+    <Compile Include="Engine\Contracts\IPlayGame.cs" />
     <Compile Include="Engine\DeckCollectionManager.cs" />
-    <Compile Include="Engine\EngineConstants.cs" />
     <Compile Include="Engine\Factory\CardFactory.cs" />
+    <Compile Include="Engine\Contracts\IDeckCollectionManager.cs" />
     <Compile Include="Engine\MainMenu.cs" />
     <Compile Include="Engine\PlayGame.cs" />
     <Compile Include="Exceptions\CardNullException.cs" />
-    <Compile Include="Factory\CardFactory.cs" />
     <Compile Include="Injection\AutofacConfig.cs" />
     <Compile Include="Player\Player.cs" />
-    <Compile Include="Enums\CretureType.cs" />
+    <Compile Include="Enums\CreatureType.cs" />
     <Compile Include="Exceptions\InvalidCardNameException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

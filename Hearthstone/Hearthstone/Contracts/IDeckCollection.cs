@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hearthstone.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,9 @@ namespace Hearthstone.Contracts
 {
     public interface IDeckCollection
     {
+        IDictionary<string, Deck> MyDeck { get; }
         void CreateDeck(string deckName);
         void RemoveDeck(string deckName);
-
+        void PrintNameOfAllDecks();
     }
 }

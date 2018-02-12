@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
-    class Spell : Card, ISpell
+    class Spell : Card, ISpell, ICard
     {
         private int damage;
 
-        public Spell(string name, int manaCost, int damage)
+        public Spell(string name, int manaCost, int damage) : base(name, manaCost)
         {
             base.Name = name;
             base.ManaCost = manaCost;

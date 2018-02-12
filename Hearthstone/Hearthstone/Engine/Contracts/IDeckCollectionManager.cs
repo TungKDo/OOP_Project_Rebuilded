@@ -2,5 +2,6 @@
 {
     public interface IDeckCollectionManager
     {
+        void ManageDeckCollection();
     }
 }

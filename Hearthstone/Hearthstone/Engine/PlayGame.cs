@@ -11,25 +11,27 @@ using System.Threading.Tasks;
 namespace Hearthstone.Engine
 {
 
-    class PlayGame
+    class PlayGame : IPlayGame
     {
         private IPlayer player1;
         private IPlayer player2;
         private IDeckCollection deckCollection;
         private readonly IMainMenu mainMenu;
+        private readonly Constants constants;
 
-        public PlayGame(IDeckCollection deckCollection, IMainMenu mainMenu)
+        public PlayGame(IDeckCollection deckCollection, IMainMenu mainMenu, Constants constants)
         {
             this.deckCollection = deckCollection;
             this.mainMenu = mainMenu;
+            this.constants = constants;
         }
 
         public void PreGameSelection()
         {
-            Console.WriteLine(Constants.AskPlayerToSelectADeck, 1);
+            Console.WriteLine(constants.AskPlayerToSelectADeck, 1);
             deckCollection.PrintNameOfAllDecks();
             player1 = new Player(deckCollection.MyDeck[Console.ReadLine()]);
-            Console.WriteLine(Constants.AskPlayerToSelectADeck, 1);
+            Console.WriteLine(constants.AskPlayerToSelectADeck, 1);
             player2 = new Player(deckCollection.MyDeck[Console.ReadLine()]);
 
             player1.PlayerDeck.Shuffle();
@@ -55,7 +57,6 @@ namespace Hearthstone.Engine
                         Console.WriteLine("Player 1 Won the game");
                         break;
                     }
-
                 }
                 else
                 {
@@ -84,7 +85,7 @@ namespace Hearthstone.Engine
 
         private void PlayTurn(IPlayer player, IPlayer opponent)
         {
-            Console.WriteLine(Constants.StartOfTurnOptions);
+            Console.WriteLine(constants.StartOfTurnOptions);
 
             while (true)
             {
@@ -96,29 +97,29 @@ namespace Hearthstone.Engine
                 switch (input)
                 {
                     case "1":
-                        Console.WriteLine(Constants.AskToEnterCreatureName);
+                        Console.WriteLine(constants.AskToEnterCreatureName);
                         player.PrintCreaturesInHand();
                         ICreature creature = player.SelectACreature(Console.ReadLine());
                         if (creature.ManaCost > player.ManaCrystals)
                         {
-                            Console.WriteLine(Constants.NotEnoughManaCrystal);
+                            Console.WriteLine(constants.NotEnoughManaCrystal);
                             break;
                         }
                         player.PlayCreature(creature);
                         break;
 
                     case "2":
-                        Console.WriteLine(Constants.AskToEnterSpellName);
+                        Console.WriteLine(constants.AskToEnterSpellName);
                         player.PrintSpellsInHand();
                         ISpell spell = player.SelectASpell(Console.ReadLine());
                         if (spell.ManaCost > player.ManaCrystals)
                         {
-                            Console.WriteLine("Not enough mana crystals");
+                            Console.WriteLine(constants.NotEnoughManaCrystal);
                             break;
                         }
                         player.ManaCrystals -= spell.ManaCost;
                         player.PlayerHand.Remove(spell);
-                        Console.WriteLine(Constants.MenuWhenCastingSpell);
+                        Console.WriteLine(constants.MenuWhenCastingSpell);
                         switch (Console.ReadLine())
                         {
                             case "1":
@@ -130,19 +131,47 @@ namespace Hearthstone.Engine
                                 break;
                         }
                         break;
+
+                    case "3":
+                        if (opponent.BattleField.Count == 0)
+                        {
+                            Console.WriteLine(constants.EnemyDoesntHaveACreature);
+                            PlayTurn(player, opponent);
+                        }
+                        else
+                        {
+                            Console.WriteLine(constants.AskToEnterCreatureName);
+                            player.PrintCreaturesOnBattleField();
+                            string attackingCreature = Console.ReadLine().ToLower();
+                            ICreature myCreature = (ICreature)player.BattleField.FirstOrDefault(x => x.Name.ToLower() == attackingCreature);
+
+                            Console.WriteLine(constants.EnterCreatureNameToBeAttacked);
+                            opponent.PrintCreaturesOnBattleField();
+                            string defendingCreature = Console.ReadLine().ToLower();
+                            ICreature oppoCreature = (ICreature)opponent.BattleField.FirstOrDefault(x => x.Name.ToLower() == defendingCreature);
+                            myCreature.Attack(oppoCreature);
+                            if (oppoCreature.IsDead)
+                            {
+                                opponent.BattleField.Remove(oppoCreature);
+                            }
+                        }
+                        break;
+                    case "4":
+                        Console.WriteLine(constants.EnterCreatureName);
+                        player.PrintCreaturesOnBattleField();
+                        ICreature myCreature2 = (ICreature)player.BattleField.FirstOrDefault(x => x.Name.ToLower() == Console.ReadLine().ToLower());
+                        myCreature2.Attack(opponent);
+                        break;                        
                 }
             }
 
         }
-
-
-
-
+        
         private void CastSpellOnOpponentsCreature(IPlayer player, IPlayer opponent, ISpell spell)
         {
             if (opponent.BattleField.Count > 0)
             {
-                Console.WriteLine(Constants.EnterCreatureName);
+                Console.WriteLine(constants.EnterCreatureName);
                 Console.WriteLine(string.Join("\n", opponent.BattleField));
                 IDamageable target = opponent.SelectACreature(Console.ReadLine());
                 spell.CastSpell(target);
@@ -153,7 +182,7 @@ namespace Hearthstone.Engine
             }
             else
             {
-                Console.WriteLine(Constants.EnemyDoesntHaveACreature);
+                Console.WriteLine(constants.EnemyDoesntHaveACreature);
                 PlayTurn(player, opponent);
             }
         }
