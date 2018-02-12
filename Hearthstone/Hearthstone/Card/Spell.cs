@@ -11,8 +11,10 @@ namespace Hearthstone.Card
     {
         private int damage;
 
-        public Spell(string name, int manaCost, int damage) : base(name, manaCost)
+        public Spell(string name, int manaCost, int damage)
         {
+            base.Name = name;
+            base.ManaCost = manaCost;
             this.Damage = damage;
         }
 
@@ -35,7 +37,11 @@ namespace Hearthstone.Card
 
         public override string ToString()
         {
-            return string.Format("Name: {0}, Mana cost: {1}, Damage: {2}", this.Name, this.ManaCost, this.damage);
+            StringBuilder info = new StringBuilder();
+
+            info.AppendFormat("Name: {0}, Mana cost: {1}, Damage: {2}", this.Name, this.ManaCost, this.damage);
+
+            return info.ToString();
         }
     }
 }
