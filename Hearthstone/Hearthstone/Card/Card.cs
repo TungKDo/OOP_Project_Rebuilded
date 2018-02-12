@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
+
+    
+
     public abstract class Card : ICard
     {
         private string name;

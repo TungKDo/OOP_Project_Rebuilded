@@ -11,19 +11,23 @@ namespace Hearthstone.Player
     class Player : IPlayer
     {
         private int maxManaCrystals;
+        private int healthPoints;
+        private bool isDead;
 
         public Player(Deck playerDeck)
         {
-            ManaCrystal = 0; //ok
+            ManaCrystal = 0;
             MaxManaCrystal = 0;
             this.PlayerDeck = playerDeck;
             PlayerHand = new List<ICard>();
             BattleField = new List<ICreature>();
             HealthPoints = 15;
+            IsDead = false;
         }
-        public int ManaCrystal { get ; set ; }
+        public int ManaCrystal { get; set; }
 
-        public int MaxManaCrystal {
+        public int MaxManaCrystal
+        {
             get
             {
                 return maxManaCrystals;
@@ -38,39 +42,71 @@ namespace Hearthstone.Player
 
         public List<ICard> PlayerHand { get; set; }
         public List<ICreature> BattleField { get; set; }
-        public int HealthPoints { get; set; }
-
-        public void AttackWithCreature(ICreature attacking IPlayer opponent)
+        public int HealthPoints
         {
-            
-            ICreature 
+            get
+            {
+                return this.healthPoints;
+            }
+            set
+            {
+                this.healthPoints = value;
+                if(value <0)
+                {
+                    this.IsDead = true;
+                }
+            }
+        }
+
+        public bool IsDead
+        {
+            get
+            {
+                return this.isDead;
+            }
+            set
+            {
+                this.isDead = value;
+            }
+        }
+
+        public void AttackWithCreature(ICreature attackingCreature, IDamageable opponent)
+        {
+            attackingCreature.Attack(opponent);
         }
 
         public ICreature SelectACreature(string creatureName)
         {
             creatureName = creatureName.ToLower();
-            ICreature myCreature = (ICreature)this.BattleField.FirstOrDefault(x => x.Name.ToLower() == creatureName);
+            ICreature myCreature = this.BattleField.FirstOrDefault(x => x.Name.ToLower() == creatureName);
             return myCreature;
         }
 
+        public ISpell SelectASpell(string spellName)
+        {
+            spellName = spellName.ToLower();
+            ISpell spell = (ISpell)this.PlayerHand.FirstOrDefault(x => x.Name.ToLower() == spellName);
+            return spell;
+        }
         public void DrawCard()
         {
-            throw new NotImplementedException();
+            ICard cardToBeDraw = PlayerDeck.Cards[0];
+            this.PlayerHand.Add(cardToBeDraw);
+            this.PlayerDeck.Cards.Remove(cardToBeDraw);
         }
 
-        public bool IsDead()
+
+        public void PlayCreature(ICreature creature)
         {
-            throw new NotImplementedException();
+            PlayerHand.Remove(creature);
+            BattleField.Add(creature);
         }
 
-        public void PlayCreature()
+        public void PlaySpell(ISpell spell,IDamageable opponent)
         {
-            throw new NotImplementedException();
+            opponent.HealthPoints = spell.Damage;
+            
         }
 
-        public void PlaySpell(IPlayer opponent)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
