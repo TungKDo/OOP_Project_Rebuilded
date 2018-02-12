@@ -8,7 +8,7 @@ namespace Hearthstone.Contracts
 {
     interface ICreature: ICard, IDamageable
     {
-        int AttackPoints { get; set; }
+        int AttackPoints { get; }
         void Attack(IDamageable target);
     }
 }
