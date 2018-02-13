@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Contracts
 {
-    interface ISpell: ICard
+    public interface ISpell: ICard
     {
         int Damage { get; set; }
         void CastSpell(IDamageable target);

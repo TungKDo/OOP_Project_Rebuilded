@@ -1,12 +1,9 @@
-﻿using Hearthstone.Card;
-using Hearthstone.Contracts;
+﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Hearthstone.Enums;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hearthstone.Contracts;
+using Hearthstone.Card;
 
 namespace Hearthstone.Tests.Card.CreatureTests
 {
@@ -14,14 +11,22 @@ namespace Hearthstone.Tests.Card.CreatureTests
     public class Attack_Should
     {
         [TestMethod]
-        public void WhenCalled_ShoulDecreasePointsOfTarget()
+        public void DamageTarget_AttackerDamageIsPossitive()
         {
-            var target = new Creature("target", 1, 1, 1, Enums.CreatureType.Beast);
-            var creature = new Creature("mm", 1, 1, 1, Enums.CreatureType.Beast);
+            int possitiveAttack = 3;
+            int manaCost = 2;
+            string validName = "attacker";
+            int healthpoints = 5;
+            var type = CreatureType.Neutral;
 
-            creature.Attack(target);
+            var attacker = new Creature(validName, manaCost, possitiveAttack, healthpoints, type);
+            var target = new Mock<IDamageable>();
 
-            Assert.IsTrue(target.HealthPoints == 0);
+            target.SetupGet(x => x.HealthPoints).Returns(5);
+            attacker.Attack(target.Object);
+            target.Verify(x => x.HealthPoints != 5);
+
+
         }
     }
 }

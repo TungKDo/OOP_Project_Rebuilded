@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Hearthstone
 {
-    class Player : IPlayer
+    public class Player : IPlayer
     {
         private int maxManaCrystals;
         private int healthPoints;
 
-        public Player(Deck playerDeck)
+        public Player(IDeck playerDeck)
         {
             ManaCrystals = 0; //ok
             MaxManaCrystals = 0;
@@ -36,7 +36,7 @@ namespace Hearthstone
                 this.maxManaCrystals = value;
             }
         }
-        public Deck PlayerDeck { get; set; }
+        public IDeck PlayerDeck { get; set; }
 
 
         public List<ICard> PlayerHand { get; set; }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Contracts
 {
-    interface IPlayer : IDamageable
+    public interface IPlayer : IDamageable
     {
         
         int ManaCrystals { get; set; }
         int MaxManaCrystals { get; set; }
-        Deck PlayerDeck { get; set; }
+        IDeck PlayerDeck { get; set; }
         List<ICard> PlayerHand { get; set; }
         List<ICreature> BattleField { get; set; }
 

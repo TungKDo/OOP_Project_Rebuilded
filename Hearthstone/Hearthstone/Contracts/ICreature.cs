@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Contracts
 {
-    interface ICreature: ICard, IDamageable
+    public interface ICreature: ICard, IDamageable
     {
         int AttackPoints { get; }
         void Attack(IDamageable target);
