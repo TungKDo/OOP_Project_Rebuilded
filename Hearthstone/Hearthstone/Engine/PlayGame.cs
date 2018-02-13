@@ -16,13 +16,11 @@ namespace Hearthstone.Engine
         private IPlayer player1;
         private IPlayer player2;
         private IDeckCollection deckCollection;
-        private readonly IMainMenu mainMenu;
         private readonly Constants constants;
 
-        public PlayGame(IDeckCollection deckCollection, IMainMenu mainMenu, Constants constants)
+        public PlayGame(IDeckCollection deckCollection, Constants constants)
         {
             this.deckCollection = deckCollection;
-            this.mainMenu = mainMenu;
             this.constants = constants;
         }
 
@@ -72,7 +70,7 @@ namespace Hearthstone.Engine
                     }
                 }
             }
-            mainMenu.Run();
+            Environment.Exit(0);
         }
         private void StartOfTurn(IPlayer player)
         {
@@ -164,7 +162,7 @@ namespace Hearthstone.Engine
                         break;                        
                 }
             }
-
+            
         }
         
         private void CastSpellOnOpponentsCreature(IPlayer player, IPlayer opponent, ISpell spell)

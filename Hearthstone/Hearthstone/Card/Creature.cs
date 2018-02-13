@@ -58,6 +58,7 @@ namespace Hearthstone.Card
 
         public void Attack(IDamageable target)
         {
+            
             target.HealthPoints -= this.AttackPoints;
         }
 
