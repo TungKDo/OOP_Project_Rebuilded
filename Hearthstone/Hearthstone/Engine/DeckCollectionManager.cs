@@ -11,14 +11,12 @@ namespace Hearthstone.Engine
 {
     public class DeckCollectionManager : IDeckCollectionManager
     {
-        private readonly IMainMenu mainMenu;
         private readonly IDeckCollection deckCollection;
         private readonly ICardFactory cardFactory;
         private readonly Constants contants;
 
-        public DeckCollectionManager(IMainMenu mainMenu, IDeckCollection deckCollection, ICardFactory cardFactory, Constants contants)
+        public DeckCollectionManager(IDeckCollection deckCollection, ICardFactory cardFactory, Constants contants)
         {
-            this.mainMenu = mainMenu;
             this.deckCollection = deckCollection;
             this.cardFactory = cardFactory;
             this.contants = contants;
@@ -27,10 +25,10 @@ namespace Hearthstone.Engine
         public void ManageDeckCollection()
         {
             Console.WriteLine(contants.DeckCollectionMenu);
-
+            bool exit = true;
             string input = Console.ReadLine();
-            while (true)
-            {
+            while (exit)
+            {                
                 switch (input)
                 {
                     case "1":
@@ -68,7 +66,7 @@ namespace Hearthstone.Engine
                         deckCollection.MyDeck[deckName].ListAllCards();
                         break;
                     case "6":
-                        mainMenu.Run();
+                        exit = false;
                         break;
                 }
             }
