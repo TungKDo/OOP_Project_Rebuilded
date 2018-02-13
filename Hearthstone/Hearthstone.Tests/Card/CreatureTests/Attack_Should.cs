@@ -11,7 +11,7 @@ namespace Hearthstone.Tests.Card.CreatureTests
     public class Attack_Should
     {
         [TestMethod]
-        public void DamageTarget_AttackerDamageIsPossitive()
+        public void IsCalledOnce_ParamIsValid()
         {
             int possitiveAttack = 3;
             int manaCost = 2;
@@ -19,12 +19,17 @@ namespace Hearthstone.Tests.Card.CreatureTests
             int healthpoints = 5;
             var type = CreatureType.Neutral;
 
+            int targetsHearthPoints = 4;
+
             var attacker = new Creature(validName, manaCost, possitiveAttack, healthpoints, type);
             var target = new Mock<IDamageable>();
 
-            target.SetupGet(x => x.HealthPoints).Returns(5);
+            target.SetupGet(x => x.HealthPoints).Returns(targetsHearthPoints);
+            
             attacker.Attack(target.Object);
-            target.Verify(x => x.HealthPoints != 5);
+            //target.Verify(x => x.HealthPoints != targetsHearthPoints);
+            target.Verify(x => x.HealthPoints, Times.Once);
+            
 
 
         }
