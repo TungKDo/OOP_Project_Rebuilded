@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
-    class Spell : Card, ISpell, ICard
+    public class Spell : Card, ISpell, ICard
     {
         private int damage;
 
@@ -32,7 +32,7 @@ namespace Hearthstone.Card
 
         public void CastSpell(IDamageable target)
         {
-            throw new NotImplementedException();
+            target.HealthPoints -= this.Damage;
         }
 
         public override string ToString()

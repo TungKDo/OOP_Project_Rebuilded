@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Hearthstone.Card
 {
-    class Creature : Card, ICreature, ICard
+    public class Creature : Card, ICreature, ICard
     {
         private int attackPoints;
         private int healtPoints;
         private readonly CreatureType creatureType;
-       
-        public Creature(string name, int manaCost, int attackPoints, int healthPoints, CreatureType creatureType) 
+
+        public Creature(string name, int manaCost, int attackPoints, int healthPoints, CreatureType creatureType)
             : base(name, manaCost)
         {
             this.AttackPoints = attackPoints;
@@ -58,10 +58,8 @@ namespace Hearthstone.Card
 
         public void Attack(IDamageable target)
         {
-            
             target.HealthPoints -= this.AttackPoints;
         }
-
         
         public override string ToString()
         {
